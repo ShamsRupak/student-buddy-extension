@@ -280,51 +280,122 @@ class StudentBuddy {
     }
 
     async queryGemini(prompt) {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.apiKey}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: prompt
+        try {
+            console.log('Student Buddy: Making API request with prompt length:', prompt.length);
+            
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.apiKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
                     }]
-                }]
-            })
-        });
+                })
+            });
 
-        if (!response.ok) {
-            throw new Error(`API request failed: ${response.status}`);
+            console.log('Student Buddy: API response status:', response.status);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Student Buddy: API Error Response:', errorText);
+                throw new Error(`API request failed: ${response.status} - ${errorText}`);
+            }
+
+            const data = await response.json();
+            console.log('Student Buddy: API response received successfully');
+            
+            // Check if response has the expected structure
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content || !data.candidates[0].content.parts || !data.candidates[0].content.parts[0]) {
+                console.error('Student Buddy: Unexpected API response structure:', data);
+                throw new Error('Unexpected API response structure');
+            }
+            
+            return data.candidates[0].content.parts[0].text;
+        } catch (error) {
+            console.error('Student Buddy: queryGemini error:', error);
+            throw error;
         }
-
-        const data = await response.json();
-        return data.candidates[0].content.parts[0].text;
     }
 
     extractProblemContext() {
         let context = '';
         
         if (this.platform === 'leetcode') {
-            // Extract problem title and description
-            const titleElement = document.querySelector('[data-cy="question-title"]') || 
-                                document.querySelector('.css-v3d350') ||
-                                document.querySelector('h1');
+            console.log('Student Buddy: Extracting LeetCode problem context...');
             
-            const descElement = document.querySelector('[data-track-load="description_content"]') ||
-                              document.querySelector('.content__u3I1') ||
-                              document.querySelector('.question-content');
+            // Try multiple selectors for the title
+            const titleSelectors = [
+                '[data-cy="question-title"]',
+                '.css-v3d350',
+                '[class*="title"]',
+                'h1',
+                '.question-title',
+                '[data-testid="question-title"]'
+            ];
+            
+            let titleElement = null;
+            for (const selector of titleSelectors) {
+                titleElement = document.querySelector(selector);
+                if (titleElement && titleElement.textContent.trim()) {
+                    console.log('Student Buddy: Found title with selector:', selector);
+                    break;
+                }
+            }
+            
+            // Try multiple selectors for the description
+            const descSelectors = [
+                '[data-track-load="description_content"]',
+                '.content__u3I1',
+                '.question-content',
+                '[class*="description"]',
+                '[class*="content"]',
+                '.elfjS',
+                '.question-detail',
+                'div[data-key="description-content"]'
+            ];
+            
+            let descElement = null;
+            for (const selector of descSelectors) {
+                descElement = document.querySelector(selector);
+                if (descElement && descElement.textContent.trim()) {
+                    console.log('Student Buddy: Found description with selector:', selector);
+                    break;
+                }
+            }
             
             if (titleElement) {
-                context += `Problem: ${titleElement.textContent.trim()}\n\n`;
+                const title = titleElement.textContent.trim();
+                context += `Problem: ${title}\n\n`;
+                console.log('Student Buddy: Extracted title:', title.substring(0, 50) + '...');
+            } else {
+                console.log('Student Buddy: No title found');
             }
             
             if (descElement) {
-                context += `Description: ${descElement.textContent.trim()}`;
+                const description = descElement.textContent.trim();
+                context += `Description: ${description}`;
+                console.log('Student Buddy: Extracted description length:', description.length);
+            } else {
+                console.log('Student Buddy: No description found');
+            }
+            
+            // If we still don't have context, try a more general approach
+            if (!context) {
+                const pageTitle = document.title;
+                if (pageTitle.includes('LeetCode')) {
+                    context = `I'm on a LeetCode problem page. The page title is: ${pageTitle}. Please provide general coding help and guidance.`;
+                    console.log('Student Buddy: Using page title as context');
+                }
             }
         }
         
-        return context || 'Unable to extract problem context from this page.';
+        const finalContext = context || 'I need help with a coding problem. Please provide general programming guidance.';
+        console.log('Student Buddy: Final context length:', finalContext.length);
+        return finalContext;
     }
 
     extractCodeContext() {

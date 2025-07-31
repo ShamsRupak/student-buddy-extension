@@ -141,16 +141,24 @@
   padding: 8px 10px;
   border-radius: 6px;
   margin-bottom: 10px;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .message.user {
   background: #e0f7fa;
   align-self: flex-end;
+  color: #333;
 }
 
 .message.assistant {
   background: #fff;
   border: 1px solid #ccc;
+  color: #333;
+}
+
+.message.assistant .message-content {
+  color: #333 !important;
 }
 
 .message.error {

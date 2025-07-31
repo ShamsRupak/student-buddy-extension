@@ -47,6 +47,12 @@ temp/
 # Coverage directory used by tools like istanbul
 coverage/
 
-# API keys (if stored in files)
+# API keys and environment files
+.env
+.env.*
+!.env.template
 api-keys.txt
 secrets.json
+config/secrets.json
+*.key
+*.pem

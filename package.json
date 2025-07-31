@@ -1,0 +1,33 @@
+{
+  "name": "student-buddy-extension",
+  "version": "1.0.0",
+  "description": "AI-powered learning companion Chrome extension that provides hints and step-by-step guidance on coding platforms",
+  "keywords": [
+    "chrome-extension",
+    "ai",
+    "learning",
+    "coding",
+    "mentor",
+    "leetcode",
+    "gemini-ai"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/student-buddy-extension.git"
+  },
+  "scripts": {
+    "build": "echo 'Building extension...' && npm run create-zip",
+    "create-zip": "zip -r student-buddy-extension.zip . -x 'node_modules/*' '.git/*' '*.zip' 'package*.json' 'README.md'",
+    "test": "echo 'Running tests...' && node test.js",
+    "lint": "echo 'Linting code...'",
+    "dev": "echo 'Development mode - load unpacked extension in Chrome'"
+  },
+  "devDependencies": {
+    "web-ext": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

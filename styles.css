@@ -1,0 +1,222 @@
+/* styles.css for Student Buddy */
+
+#student-buddy-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 350px;
+  height: 500px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+#student-buddy-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #667eea;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+#student-buddy-panel.visible {
+  display: flex;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.buddy-header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buddy-title {
+  display: flex;
+  align-items: center;
+}
+
+.buddy-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+.buddy-content {
+  flex: 1;
+  padding: 10px;
+  background: #f7f7f9;
+  overflow-y: auto;
+}
+
+.platform-badge {
+  background: #667eea;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.status-indicator {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.status-indicator.connected {
+  background: #4CAF50;
+}
+
+.status-indicator.disconnected {
+  background: #f44336;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.action-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.action-btn.secondary {
+  background: #667eea;
+}
+
+.action-btn:hover {
+  background: #45a049;
+}
+
+.chat-container {
+  border-top: 2px solid #eee;
+  padding-top: 10px;
+}
+
+.messages {
+  max-height: 180px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.message.user {
+  background: #e0f7fa;
+  align-self: flex-end;
+}
+
+.message.assistant {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.message.error {
+  background: #ffebee;
+  border: 1px solid #f44336;
+  color: #f44336;
+}
+
+.typing-dots {
+  display: flex;
+}
+
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-right: 2px;
+  animation: blink 1.4s infinite both;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.input-area button {
+  padding: 10px 15px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.buddy-footer {
+  background: #f7f7f9;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.buddy-footer .powered-by {
+  font-weight: bold;
+}

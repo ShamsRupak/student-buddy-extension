@@ -1,10 +1,70 @@
 <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+    <!-- Main gradient -->
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#667eea;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- Brain gradient -->
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:0.8" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
   </defs>
-  <circle cx="64" cy="64" r="60" fill="url(#grad1)" stroke="#fff" stroke-width="4"/>
-  <text x="64" y="74" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">🎓</text>
+  
+  <!-- Main circle background -->
+  <circle cx="64" cy="64" r="58" fill="url(#mainGrad)" stroke="#fff" stroke-width="3" filter="url(#glow)"/>
+  
+  <!-- Brain/AI symbol -->
+  <g transform="translate(64, 50)">
+    <!-- Brain outline -->
+    <path d="M-18,-10 C-22,-18 -15,-25 -8,-22 C-3,-28 8,-28 13,-22 C20,-25 27,-18 23,-10 C25,-5 25,5 20,12 C15,18 5,20 0,18 C-5,20 -15,18 -20,12 C-25,5 -25,-5 -18,-10 Z" 
+          fill="url(#brainGrad)" stroke="#fff" stroke-width="1.5" opacity="0.95"/>
+    
+    <!-- Brain details/circuits -->
+    <path d="M-12,-5 Q-8,-8 -4,-5 Q0,-8 4,-5 Q8,-8 12,-5" 
+          stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <path d="M-10,0 Q-5,3 0,0 Q5,3 10,0" 
+          stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <path d="M-8,5 Q-3,8 2,5 Q7,8 8,5" 
+          stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
+  </g>
+  
+  <!-- Graduation cap -->
+  <g transform="translate(64, 75)">
+    <!-- Cap base -->
+    <ellipse cx="0" cy="3" rx="20" ry="6" fill="#2c3e50" opacity="0.9"/>
+    <!-- Cap top -->
+    <path d="M-18,0 L18,0 L15,-8 L-15,-8 Z" fill="#34495e"/>
+    <!-- Tassel -->
+    <circle cx="15" cy="-4" r="2" fill="#f39c12"/>
+    <rect x="14" y="-2" width="2" height="12" fill="#f39c12" rx="1"/>
+    <circle cx="15" cy="10" r="1.5" fill="#e67e22"/>
+  </g>
+  
+  <!-- AI circuit elements -->
+  <g opacity="0.6">
+    <!-- Connection dots -->
+    <circle cx="25" cy="35" r="2" fill="#4CAF50"/>
+    <circle cx="103" cy="45" r="2" fill="#4CAF50"/>
+    <circle cx="20" cy="85" r="2" fill="#667eea"/>
+    <circle cx="108" cy="90" r="2" fill="#667eea"/>
+    
+    <!-- Connection lines -->
+    <path d="M27,35 Q40,25 52,40" stroke="#4CAF50" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M76,40 Q90,30 101,45" stroke="#4CAF50" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M22,85 Q35,95 52,85" stroke="#667eea" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M76,85 Q90,95 106,90" stroke="#667eea" stroke-width="1" fill="none" opacity="0.5"/>
+  </g>
 </svg>

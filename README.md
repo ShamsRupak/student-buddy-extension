@@ -4,6 +4,8 @@
 
 ![Student Buddy Logo](icons/icon128.png)
 
+*🧠 AI-Powered Learning • 🎓 Educational Companion • 💡 Smart Guidance*
+
 **Your AI-powered learning companion that provides hints and step-by-step guidance on coding platforms**
 
 [![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285f4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore)

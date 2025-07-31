@@ -283,7 +283,7 @@ class StudentBuddy {
         try {
             console.log('Student Buddy: Making API request with prompt length:', prompt.length);
             
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${this.apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

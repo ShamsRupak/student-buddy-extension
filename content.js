@@ -56,7 +56,15 @@ class StudentBuddy {
         // Create floating action button
         const fab = document.createElement('div');
         fab.id = 'student-buddy-fab';
-        fab.innerHTML = '🎓';
+        
+        // Use logo image instead of emoji
+        const logoImg = document.createElement('img');
+        logoImg.src = chrome.runtime.getURL('icons/icon48.png');
+        logoImg.style.width = '40px';
+        logoImg.style.height = '40px';
+        logoImg.style.borderRadius = '50%';
+        fab.appendChild(logoImg);
+        
         fab.addEventListener('click', () => this.togglePanel());
         document.body.appendChild(fab);
 
